@@ -1,85 +1,31 @@
 import React, { Component } from 'react';
-import { Text, View, Dimensions, StyleSheet, ScrollView, Image } from 'react-native';
+import { Text, View, Dimensions, StyleSheet, ScrollView, Image ,TouchableOpacity} from 'react-native';
 
 import Carousel, { Pagination } from '@amazingbeerbelly/react-native-snap-carousel';
+import ListInfo from './ListInfo'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { scrollInterpolator, animatedStyles } from './animation';
-import ListInfo from './ListInfo'
-
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9);
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
 
-const DATA = [];
-for (let i = 0; i < 6; i++) {
-  DATA.push(i)
-}
 
 export default class Info extends Component {
 
-  state = {
-    index: 0
-  }
-
-  constructor(props) {
-    super(props);
-    this._renderItem = this._renderItem.bind(this)
-  }
-
-  _renderItem({ item }) {
-    return (
-      <View style={styles.itemContainer}>
-        <ListInfo />
-      </View>
-    );
-  }
-  get pagination() {
-    const { entries, activeSlide } = this.state;
-    return (
-      <Pagination
-        dotsLength={6}
-        activeDotIndex={activeSlide}
-        containerStyle={{ backgroundColor: 'white', marginTop: -20 }}
-        dotStyle={{
-          width: 10,
-          height: 10,
-          borderRadius: 5,
-          marginHorizontal: 8,
-          backgroundColor: 'blue'
-        }}
-        inactiveDotStyle={{
-          // Define styles for inactive dots here
-        }}
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
-      />
-    )
-  }
   render() {
     return (
       <View>
       <ScrollView>
-        <Carousel
-          ref={(c) => this.carousel = c}
-          data={DATA}
-          renderItem={this._renderItem}
-          sliderWidth={SLIDER_WIDTH}
-          itemWidth={ITEM_WIDTH}
-          containerCustomStyle={styles.carouselContainer}
-          inactiveSlideShift={0}
-          onSnapToItem={(index) => this.setState({ activeSlide: index })}
-          scrollInterpolator={scrollInterpolator}
-          slideInterpolatedStyle={animatedStyles}
-          useScrollView={true}
-
-        />
-        { this.pagination}
         <View>
-          <Text>Tên Khách Sạn</Text>
-          <View style={{ flexDirection: 'row' }}>
+          <Icon name="heart-circle-outline" size={30} style={styles.heart}/>
+          <Image  source={require('../imgTest/logo.jpg')} style={styles.logoImg}/>
+        </View>
+        <View>
+          <View style={{paddingLeft:10}}>
+          <Text style={styles.nameRoom}>Tên Khách Sạn</Text>
+          <View style={{ flexDirection: 'row',paddingVertical:5 }}>
             <View style={styles.allStar}>
               <Icon name="star" style={{ color: '#F2C042' }} />
               <Icon name="star" style={{ color: '#F2C042' }} />
@@ -92,9 +38,10 @@ export default class Info extends Component {
               <Text style={{ fontSize: 12, fontWeight: "400" }}>99 Đánh giá</Text>
             </View>
           </View>
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row' ,paddingBottom:5,}}>
             <Icon name="location" size={20} style={{ fontSize: 11.06, color: "red" }} />
             <Text style={{ fontSize: 12, fontWeight: "400" }}>Địa chỉ khách sạn</Text>
+          </View>
           </View>
           <View style={styles.container}>
             <MapView
@@ -112,55 +59,55 @@ export default class Info extends Component {
                 title={'Sys Homestay'}
               ></Marker>
             </MapView>
-            <Text>Xem bản đồ</Text>
+            <Text style={styles.seeMap}>Xem bản đồ</Text>
           </View>
           <View>
-            <View>
-              <Text>Giá tốt nhất</Text>
-              <TouchableOpacity>
-                <Text>Agoda</Text>
-                <View style={{ alignItems: 'flex-end', }}>
+            <View >
+              <Text style={styles.title} >Giá tốt nhất</Text>
+              <TouchableOpacity style={styles.button}>
+                <Text style={{position:"absolute",padding: 8,fontSize:15,fontWeight:"700"}}>Agoda</Text>
+                <View style={{ alignItems: 'flex-end',paddingRight: 7 }}>
                   <Text style={{ fontSize: 18, fontWeight: '700', color: "#00BC9A" }}>2.370.000 VND</Text>
                   <Text style={{ fontSize: 11, fontWeight: '400' }}>mỗi đêm</Text>
                 </View>
               </TouchableOpacity>
             </View>
             <View>
-              <Text>Gia khác</Text>
-              <TouchableOpacity>
-                <Text>Agoda</Text>
-                <View style={{ alignItems: 'flex-end', }}>
+              <Text style={styles.title}>Giá khác</Text>
+              <TouchableOpacity style={styles.button}>
+                <Text style={{position:"absolute",padding: 8,fontSize:15,fontWeight:"700"}}>Agoda</Text>
+                <View style={{ alignItems: 'flex-end', paddingRight: 7,}}>
                   <Text style={{ fontSize: 18, fontWeight: '700', color: "#00BC9A" }}>2.370.000 VND</Text>
                   <Text style={{ fontSize: 11, fontWeight: '400' }}>mỗi đêm</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity>
-                <Text>Agoda</Text>
-                <View style={{ alignItems: 'flex-end', }}>
+              <TouchableOpacity style={styles.button}>
+                <Text style={{position:"absolute",padding: 8,fontSize:15,fontWeight:"700"}}>Agoda</Text>
+                <View style={{ alignItems: 'flex-end',paddingRight: 7 }}>
                   <Text style={{ fontSize: 18, fontWeight: '700', color: "#00BC9A" }}>2.370.000 VND</Text>
                   <Text style={{ fontSize: 11, fontWeight: '400' }}>mỗi đêm</Text>
                 </View>
               </TouchableOpacity>
-              <Text>Xem thêm</Text>
+              <Text style={{right:0}}>Xem thêm</Text>
 
             </View>
-            <View>
-              <Text>Tiện ích, dịch vụ</Text>
-              <View>
-                <View style={{ flexDirection: 'row' }}>
-                  <Icon name="fast-food" />
+            <View style={styles.dichvu}>
+              <Text style={{fontSize:15,fontWeight:"700"}}>Tiện ích, dịch vụ</Text>
+              <View style={{flexDirection:'column',alignContent:"stretch",width:200}}>
+                <View style={{ flexDirection: 'row' ,width: "50%",}}>
+                  <Icon name="fast-food" size={20}/>
                   <Text>Dịch vụ abc</Text>
                 </View>
-                <View style={{ flexDirection: 'row' }}>
-                  <Icon name="fast-food" />
+                <View style={{ flexDirection: 'row' ,width: "50%", }}>
+                  <Icon name="fast-food" size={20}/>
                   <Text>Dịch vụ abc</Text>
                 </View>
-                <View style={{ flexDirection: 'row' }}>
-                  <Icon name="fast-food" />
+                <View style={{ flexDirection: 'row'  ,width: "50%",}}>
+                  <Icon name="fast-food" size={20}/>
                   <Text>Dịch vụ abc</Text>
                 </View>
-                <View style={{ flexDirection: 'row' }}>
-                  <Icon name="fast-food" />
+                <View style={{ flexDirection: 'row'  ,width: "50%",}}>
+                  <Icon name="fast-food" size={20}/>
                   <Text>Dịch vụ abc</Text>
                 </View>
               </View>
@@ -201,26 +148,17 @@ export default class Info extends Component {
             </View>
             
           </View>
-          <View style={{flexDirection:'row',justifyContent:'space-between',position: 'absolute', left: 0, right: 0, bottom: 0}}>
-            <View>
-            <Text>Giá tốt nhất </Text>
-            <Text>từ Agoda</Text>
-            </View>
-            <View>
-              <Text>2.370.000 VNĐ</Text>
-              <Text>mỗi đêm</Text>
-            </View>
-          </View>
+          
         </View>
       </ScrollView>
-      <View style={{flexDirection:'row',justifyContent:'space-between',position: 'absolute', left: 0, right: 0, bottom: 0}}>
+      <View style={{flexDirection:'row',justifyContent:'space-between',position: 'absolute', left: 0, right: 0, bottom: 0,backgroundColor:"#fff"}}>
             <View>
-            <Text>Giá tốt nhất </Text>
-            <Text>từ Agoda</Text>
+            <Text style={{fontSize:25,fontWeight:"700"}}>Giá tốt nhất </Text>
+            <Text style={{fontSize:14,fontWeight:"700"}}>từ Agoda</Text>
             </View>
-            <View>
-              <Text>2.370.000 VNĐ</Text>
-              <Text>mỗi đêm</Text>
+            <View style={{ alignItems: 'flex-end',paddingRight: 7 }}>
+              <Text style={{ fontSize: 18, fontWeight: '700', color: "#00BC9A" }}>2.370.000 VNĐ</Text>
+              <Text style={{ fontSize: 11, fontWeight: '400' }}>mỗi đêm</Text>
             </View>
           </View>
       </View>
@@ -232,6 +170,10 @@ const styles = StyleSheet.create({
   logo: {
     width: 66,
     height: 58,
+  },
+  logoImg:{
+    height:345,
+    width:"100%",
   },
   map: {
     height: 76,
@@ -265,4 +207,36 @@ const styles = StyleSheet.create({
     color: "yellow",
     paddingRight: 10
   },
+  heart:{
+    position:"absolute",
+    zIndex:1,
+    top:20,
+    right:20,
+    color:"#FFF"
+  },
+  nameRoom:{
+    fontSize:20,
+    fontWeight:"700",
+    paddingVertical:5
+  },
+  seeMap:{
+    position:"absolute",
+    zIndex:1,
+    right:0,
+    bottom:0,
+    color:"green",
+    backgroundColor:"#FFF"
+  },button:{
+    height:39,
+    margin: 10,
+    borderRadius: 10,
+    borderWidth:1,
+    
+  },
+  title:{
+    paddingTop: 10,
+    paddingHorizontal: 10,
+    fontWeight:"700",
+    fontSize:20,
+  }
 });

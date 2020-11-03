@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   Item:{borderRadius:10, 
     margin:16,
     borderWidth: 1,
-    
+    backgroundColor: "#FFF",
 },
 heart:{
     position:"absolute",

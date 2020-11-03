@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Maps from '../MapsRoom/Maps'
-
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-const HeaderItem = ({navigation}) => {
+const HeaderItem = () => {
 
   return (
     <View style={styles.header}>
@@ -16,9 +12,7 @@ const HeaderItem = ({navigation}) => {
           <Icon name="search" size={20} style={styles.iconSearch} />
           <TextInput placeholder="Tìm kiếm" style={styles.input}/>
         </View>
-        <Icon name="md-location-outline" size={20} style={styles.mapIcon} 
-        onPress={() => navigation.navigate('Maps')}
-        />
+        <Icon name="md-location-outline" size={20} style={styles.mapIcon} />
       </View>
       <View style={styles.fillter}>
         <View style={styles.left}>
@@ -49,7 +43,7 @@ const HeaderItem = ({navigation}) => {
 
 export default HeaderItem;
 const styles = StyleSheet.create({
-  //header:{position:'absolute',zIndex:1},
+  header:{position:'absolute',zIndex:1,width:"100%",},
   headerSearch:{
     flexDirection:'row',
     backgroundColor:"#C5F2EF",
