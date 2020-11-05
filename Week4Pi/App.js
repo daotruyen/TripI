@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Header from './Componet/Header';
+import Header from './Components/Header';
 import MyButton from './Test/Test';
-import ListItem from "./Componet/ListItem";
-import Home from "./Componet/Home"
-import HomeItem from './Componet/HomeItem';
+import ListItem from "./Components/ListItem";
+import Home from "./Components/Home"
+import HomeItem from './Components/HomeItem';
 import Detail from './Detail/Detail'
 import Info from './InfoRoom/Info'
 import Maps from './MapsRoom/Maps'
