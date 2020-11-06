@@ -3,6 +3,7 @@ import {
   View, Text, StyleSheet, Dimensions, ScrollView,
   Animated,
   Image,
+  SafeAreaView
 } from 'react-native';
 import HeaderMap from './HeaderMap'
 import DetailItem from '../Detail/DetailItem'
@@ -17,7 +18,7 @@ const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 
 
-const Maps = () => {
+const Maps = ({navigation}) => {
   const initMap = {
     makers,
     region: {
@@ -60,8 +61,9 @@ const Maps = () => {
   })
 
   return (
+    <SafeAreaView>
     <View style={styles.container}>
-      <HeaderMap style={styles.header}/>
+      <HeaderMap style={styles.header} navigation={navigation}/>
       <MapView
         ref={_map}
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
@@ -107,10 +109,11 @@ const Maps = () => {
         )}
       >
         {state.makers.map((makers, index) => (
-          <DetailItem key={index} />
+          <DetailItem key={index} navigation={navigation}/>
         ))}
       </ScrollView>
     </View>
+    </SafeAreaView>
   );
 }
 export default Maps;

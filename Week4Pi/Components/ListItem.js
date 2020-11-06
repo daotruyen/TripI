@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-const ListItem = () => {
+const ListItem = ({navigation}) => {
     return (
-        <View style={styles.list}>
+        <View style={styles.list}
+        onStartShouldSetResponder={() => navigation.navigate('Info')}
+        >
             <Image
                 style={styles.tinyLogo}
                 source={{

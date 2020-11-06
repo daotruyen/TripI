@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
-const HeaderItem = () => {
+const HeaderItem = ({navigation}) => {
 
   return (
     <View style={styles.header}>
       <View style={styles.headerSearch}>
-        <Icon name="chevron-back-outline" size={20} style={styles.back} />
+        <Icon name="chevron-back-outline" size={20} style={styles.back} 
+        onPress={() => navigation.goBack()}/>
         <View style={styles.inputHeader}>
           <Icon name="search" size={20} style={styles.iconSearch} />
           <TextInput placeholder="Tìm kiếm" style={styles.input}/>

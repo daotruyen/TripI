@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import ListItem from './ListItem';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ListPlace from './ListPlace'
-const Home=()=>{
+const Home=({navigation})=>{
 
   
     return (
@@ -16,10 +16,10 @@ const Home=()=>{
           </View>
 
           <ScrollView horizontal={true}>
-            <ListItem />
-            <ListItem />
-            <ListItem />
-            <ListItem />
+            <ListItem navigation={navigation}/>
+            <ListItem navigation={navigation}/>
+            <ListItem navigation={navigation}/>
+            <ListItem navigation={navigation}/>
           </ScrollView>
         </View>
         <View >

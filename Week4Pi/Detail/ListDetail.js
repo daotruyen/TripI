@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import DetailItem from './DetailItem';
-const Detail = () => {
+const ListDetail = ({navigation}) => {
   
-  
+    const arr=[
+      {number:1},
+      {number:2},
+      {number:3},
+      {number:4},
+      {number:5},
+      {number:6},
+      {number:7},
+      {number:8},
+      
+    ]
     return (
       <View>
-        <DetailItem/>
-        <DetailItem/>
-        <DetailItem/>
-        <DetailItem/>
-        <DetailItem/>
-        <DetailItem/>
-        <DetailItem/>
-        <DetailItem/>
+        {arr.map((arr,index)=>{
+          return(
+            <DetailItem key={index} navigation={navigation}/>
+          )
+        })}
       </View>
     );
   }
 
 
-export default Detail;
+export default ListDetail;

@@ -12,9 +12,9 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
 
 
-export default class Info extends Component {
+const Info = ({navigation}) =>{
 
-  render() {
+  
     return (
       <View>
       <ScrollView>
@@ -43,7 +43,9 @@ export default class Info extends Component {
             <Text style={{ fontSize: 12, fontWeight: "400" }}>Địa chỉ khách sạn</Text>
           </View>
           </View>
-          <View style={styles.container}>
+          <View style={styles.container}
+            onStartShouldSetResponder={() => navigation.navigate('Maps')}>
+          
             <MapView
               provider={PROVIDER_GOOGLE} // remove if not using Google Maps
               style={styles.map}
@@ -164,8 +166,8 @@ export default class Info extends Component {
       </View>
     );
   }
-}
 
+export default Info;
 const styles = StyleSheet.create({
   logo: {
     width: 66,

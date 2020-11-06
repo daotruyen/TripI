@@ -7,13 +7,13 @@ import {
 } from 'react-native';
 import Header from './Header';
 import Home from "./Home"
-const HomeItem = () => {
+const HomeItem = ({navigation}) => {
   return (
      
       <SafeAreaView>
         <View>
-          <Header/>
-          <Home/>
+          <Header navigation={navigation}/>
+          <Home navigation={navigation}/>
         </View>
         
       </SafeAreaView>

@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import { View, Text ,TextInput,TouchableOpacity,StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-const Header =()=>{
+const Header =({navigation})=>{
     const [value, onChangeText] = useState('Useless Placeholder');
 
    
@@ -17,19 +17,10 @@ const Header =()=>{
                 />
             </View>
             <Icon name="map" size={25} style={styles.iconMap}
-            onPress={console.log("map")}
+            onPress={() => navigation.navigate('Maps')}
             />
         </View>
-        <View style={styles.infoRoom}>
-            <View style={styles.day}>
-                <Text style={{paddingVertical:5}}>Ngày</Text>
-                <Text>__/__-__/__</Text>
-            </View>
-            <View style={styles.room}>
-                <Text style={{paddingVertical:6}}>Phòng</Text>
-                <Text style={{fontWeight:"800",}}>__phòng - __người</Text>
-            </View>
-        </View>
+        
         <TouchableOpacity style={styles.button}>
             <Text style={{textAlign:"center",lineHeight:35,fontSize:16,fontWeight:"700",color:"#FFFFFF"}}>Gửi</Text>
         </TouchableOpacity>
@@ -75,6 +66,7 @@ const styles = StyleSheet.create({
       height: 37.01,
       backgroundColor: '#26AE90',
       borderRadius: 40,
+      marginTop:30
     },
     infoRoom:{
       flexDirection:'row',

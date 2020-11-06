@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 import HeaderItem from './HeaderItem'
 import ListDetail from './ListDetail';
-const Detail = ({ navigation }) => {
+const Detail = ({ navigation, ...props }) => {
 
 
   return (
@@ -11,7 +11,7 @@ const Detail = ({ navigation }) => {
         <HeaderItem />
         <ScrollView>
 
-          <ListDetail />
+          <ListDetail navigation={navigation}/>
         </ScrollView>
       </View>
     </SafeAreaView>
