@@ -9,7 +9,47 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 
+
+
 export default class Login extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      username:"",
+      password:"",
+      checkLogin:0
+    }
+  }
+  _onSubmit=()=>{
+    return fetch('http://10.0.2.2:8888/user/login', { 
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    	body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+      })
+    })
+    .then((response) => response.json())
+	  .then((responseJson) => {
+        this.setState({checkLogin:responseJson.success});
+        if(this.state.checkLogin>0){
+            //console.warn(responseJson);
+            Alert.alert("Thông báo!","Bạn đã đăng nhập thành công!");
+        }
+        else{
+           // console.warn(responseJson);
+            Alert.alert("Thông báo!","Bạn đã đăng nhập không thành công!");
+        }
+    })
+    .catch((error) =>{
+        console.error(error);
+    });
+  }
+    
+
   render() {
     return (
       <View style={styles.container}>
@@ -24,6 +64,7 @@ export default class Login extends Component {
             keyboardType='email-address'
             placeholder='Email'
             keyboardAppearance='default'
+            onChangeText={(username) => this.setState({username:username})}
             >
             </TextInput>
           </View>
@@ -32,13 +73,16 @@ export default class Login extends Component {
             style={styles.textInput}
             placeholder='PassWord'
             secureTextEntry={true}
+            onChangeText={(password) => this.setState({password:password})}
             >
             </TextInput>
           </View>
           <TouchableOpacity>
             <Text>Quên mật khẩu</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.LoginButton}>
+          <TouchableOpacity style={styles.LoginButton}
+            onPress={this._onSubmit}
+          >
             <Text style={styles.LoginButtonTitle}>LOGIN</Text>
           </TouchableOpacity>
           <Text>Hoặc</Text>
