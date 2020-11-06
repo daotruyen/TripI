@@ -1,0 +1,20 @@
+{
+  "name": "TripI",
+  "version": "1.0.0",
+  "description": "TripI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daotruyen/TripI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daotruyen/TripI/issues"
+  },
+  "homepage": "https://github.com/daotruyen/TripI#readme"
+}

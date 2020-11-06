@@ -37,11 +37,11 @@ export default class Login extends Component {
         this.setState({checkLogin:responseJson.success});
         if(this.state.checkLogin>0){
             //console.warn(responseJson);
-            Alert.alert("Thông báo!","Bạn đã đăng nhập thành công!");
+            console.log("Thông báo!","Bạn đã đăng nhập thành công!");
         }
         else{
            // console.warn(responseJson);
-            Alert.alert("Thông báo!","Bạn đã đăng nhập không thành công!");
+           console.log("Thông báo!","Bạn đã đăng nhập không thành công!");
         }
     })
     .catch((error) =>{
