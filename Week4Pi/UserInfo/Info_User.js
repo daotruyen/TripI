@@ -3,14 +3,8 @@ import { View, Text ,Image,Dimensions,StyleSheet,SafeAreaView} from 'react-nativ
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 const SLIDER_WIDTH = Dimensions.get('window').width;
-class Info_User extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
-  render() {
+const Info_User =({navigation})=> {
+  
     return (
       <SafeAreaView>
       <View>
@@ -32,10 +26,14 @@ class Info_User extends Component {
             <Icon name ="chevron-forward" size={20}/>
         </TouchableOpacity>
         <View style={{flexDirection:'row',marginVertical: 30,}}>
-          <TouchableOpacity style={styles.log}>
+          <TouchableOpacity style={styles.log}
+          onPress={() => navigation.navigate('Signup')}
+          >
             <Text style={styles.text}>Đăng ký</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.log}>
+          <TouchableOpacity style={styles.log}
+          onPress={() => navigation.navigate('Login')}
+          >
             <Text style={styles.text}>Đăng nhập</Text>
           </TouchableOpacity>
           </View>
@@ -44,7 +42,7 @@ class Info_User extends Component {
       </SafeAreaView>
     );
   }
-}
+
 
 export default Info_User;
 const styles = StyleSheet.create({
