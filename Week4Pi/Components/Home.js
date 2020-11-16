@@ -4,9 +4,22 @@ import { ScrollView } from 'react-native-gesture-handler';
 import ListItem from './ListItem';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ListPlace from './ListPlace'
+const data =[
+  {index:1,key:1,image:'https://reactnative.dev/img/tiny_logo.png',
+  space:"Nha Trang",people:2,timeStart:"12/12",timeENd:"13/12",
+},
+{index:2,key:1,image:'https://reactnative.dev/img/tiny_logo.png',
+  space:"Nha Tran",people:2,timeStart:"12/12",timeENd:"13/12",
+},
+{index:3,key:1,image:'https://reactnative.dev/img/tiny_logo.png',
+  space:"Nha Trang",people:2,timeStart:"12/12",timeENd:"13/12",
+},
+{index:4,key:1,image:'https://reactnative.dev/img/tiny_logo.png',
+  space:"Nha Trang",people:2,timeStart:"12/12",timeENd:"13/12",
+}
+]
 const Home=({navigation})=>{
 
-  
     return (
       <View>
         <View >
@@ -16,10 +29,15 @@ const Home=({navigation})=>{
           </View>
 
           <ScrollView horizontal={true}>
-            <ListItem navigation={navigation}/>
-            <ListItem navigation={navigation}/>
-            <ListItem navigation={navigation}/>
-            <ListItem navigation={navigation}/>
+            {data.map((data,index)=>{
+              return (
+                <ListItem 
+                key={index} 
+                navigation={navigation}
+                data={[data]}
+                />
+              )
+            })}
           </ScrollView>
         </View>
         <View >

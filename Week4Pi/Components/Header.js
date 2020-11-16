@@ -9,20 +9,20 @@ const Header =({navigation})=>{
       <View style={styles.container}>
         <View style={styles.search}>
             <View style={styles.boxSearch}>
-                <Icon name="search" size={20} style={styles.iconSearch}/>
+                <Icon name="search" size={25} style={styles.iconSearch}/>
                 <TextInput
                     style={styles.input}
                     onChangeText={text => onChangeText(text)}
                     placeholder="Tên khách sạn, địa điểm ..."
                 />
             </View>
-            <Icon name="map" size={25} style={styles.iconMap}
+            <Icon name="map" size={30} style={styles.iconMap}
             onPress={() => navigation.navigate('Maps')}
             />
         </View>
         
         <TouchableOpacity style={styles.button}>
-            <Text style={{textAlign:"center",lineHeight:35,fontSize:16,fontWeight:"700",color:"#FFFFFF"}}>Gửi</Text>
+            <Text style={{textAlign:"center",lineHeight:45,fontSize:18,fontWeight:"700",color:"#FFFFFF"}}>Gửi</Text>
         </TouchableOpacity>
       </View>
     );
@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     container: {
       borderRadius:30,
       opacity:0.8,
-      margin:20,
-      padding:20,
+      margin:10,
+      padding:25,
       backgroundColor:"#A4EBE7",
     },
     search:{
@@ -43,13 +43,13 @@ const styles = StyleSheet.create({
     iconSearch:{
       position:'absolute',
       zIndex:2,
-      top:6,
+      top:10,
       left:5,
       color:"#26AE90"
     },
     input:{
       width:305,
-      height:35,
+      height:45,
       borderRadius:30,
       backgroundColor:"#F2FFFE",
       paddingLeft:30,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     },
     button: {
       width: 335,
-      height: 37.01,
+      height: 45,
       backgroundColor: '#26AE90',
       borderRadius: 40,
       marginTop:30

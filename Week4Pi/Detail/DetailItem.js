@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { View, Text ,Image,StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Info from '../InfoRoom/Info'
+import StarRating from 'react-native-star-rating';
 const DetailItem = ({navigation}) => {
-
+    const [star,setStar] =  React.useState('');
     return (
         <View style={styles.Item}
         onStartShouldSetResponder={() => navigation.navigate('Info')}
         >
             <View>
-            <Icon name="heart-circle-outline" size={20} style={styles.heart}/>
+            <Icon name="heart-circle-outline" size={20} style={styles.heart} onPress={() => {}}/>
             <Image
                 style={{height:100,position:'relative'}}
                 source={{
@@ -19,11 +20,11 @@ const DetailItem = ({navigation}) => {
                 
             />
             <View style={styles.allStar}>
-                <Icon name="star" style={{color:'#F2C042'}}/>
-                <Icon name="star" style={{color:'#F2C042'}}/>
-                <Icon name="star" style={{color:'#F2C042'}}/>
-                <Icon name="star" style={{color:'#F2C042'}}/>
-                <Icon name="star" style={{color:'#F2C042'}}/>
+            <Icon name="star" style={{ color: '#F2C042' }} />
+              <Icon name="star" style={{ color: '#F2C042' }} />
+              <Icon name="star" style={{ color: '#F2C042' }} />
+              <Icon name="star" style={{ color: '#F2C042' }} />
+              <Icon name="star" style={{ color: '#F2C042' }} />
             </View>
             </View>
             <View style={{padding:7}}>

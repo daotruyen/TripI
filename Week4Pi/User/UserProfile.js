@@ -12,14 +12,14 @@ import {
 import Icon from 'react-native-vector-icons/AntDesign';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
-var radio_props = [
+const radio_props = [
   {label: 'Nam', value: 0 },
   {label: 'Nữ', value: 1 },
   {label: 'Khác', value: null}
 ];
 
-export default class UserProfile extends Component {
-  render() {
+const UserProfile =()=>{
+  const [value,setValue]=React.useState('');
       return(
           <View style={styles.container}>
               <View style={styles.top}>
@@ -59,7 +59,7 @@ export default class UserProfile extends Component {
                     formHorizontal={true}
                     labelHorizontal={false}
                     initial={0}
-                    onPress={(value) => {this.setState({value:value})}}
+                    onPress={(value) => {setValue(value)}}
                   />
                   <Text style={styles.title1}>Địa chỉ</Text>
                   <TextInput
@@ -100,7 +100,7 @@ export default class UserProfile extends Component {
           </View>
       )
   }
-}
+export default UserProfile;
 
 const styles = StyleSheet.create({
     container:{

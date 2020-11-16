@@ -6,6 +6,7 @@ import ListInfo from './ListInfo'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { scrollInterpolator, animatedStyles } from './animation';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -14,13 +15,19 @@ const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
 
 const Info = ({navigation}) =>{
 
-  
+    const Heart ={
+      
+    }
     return (
+      <SafeAreaView>
       <View>
       <ScrollView>
         <View>
-          <Icon name="heart-circle-outline" size={30} style={styles.heart}/>
+          <Icon name="heart-circle-outline" size={40} style={styles.heart}/>
           <Image  source={require('../imgTest/logo.jpg')} style={styles.logoImg}/>
+          <Icon name="chevron-back-outline" size={40} style={styles.back}
+          onPress={() => navigation.goBack()}
+          />
         </View>
         <View>
           <View style={{paddingLeft:10}}>
@@ -164,6 +171,7 @@ const Info = ({navigation}) =>{
             </View>
           </View>
       </View>
+      </SafeAreaView>
     );
   }
 
@@ -214,6 +222,13 @@ const styles = StyleSheet.create({
     zIndex:1,
     top:20,
     right:20,
+    color:"#FFF"
+  },
+  back:{
+    position:"absolute",
+    zIndex:1,
+    top:20,
+    left:20,
     color:"#FFF"
   },
   nameRoom:{

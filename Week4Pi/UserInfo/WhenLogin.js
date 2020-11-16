@@ -2,15 +2,10 @@ import React, { Component } from 'react';
 import { View, Text ,Image,Dimensions,StyleSheet} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { AuthContext } from '../Test/Context';
 const SLIDER_WIDTH = Dimensions.get('window').width;
-class WhenLogin extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
-  render() {
+const WhenLogin =() => {
+  const { signOut } = React.useContext(AuthContext);
     return (
       <View>
         <View style={{flexDirection: 'row',marginHorizontal: 20,marginVertical:20}}>
@@ -39,7 +34,8 @@ class WhenLogin extends Component {
             <Icon name ="chevron-forward" size={20}/>
         </TouchableOpacity>
         <View>
-            <TouchableOpacity style={styles.log}>
+            <TouchableOpacity style={styles.log}
+            onPress={() => {signOut()}}>
                 <Text style={styles.text}>Đăng xuất</Text>
             </TouchableOpacity>
         </View>
@@ -47,7 +43,6 @@ class WhenLogin extends Component {
       </View>
     );
   }
-}
 
 export default WhenLogin;
 const styles = StyleSheet.create({

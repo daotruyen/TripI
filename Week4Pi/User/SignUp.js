@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,setState } from 'react';
 import {
   StyleSheet,
   View,
@@ -8,87 +8,144 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+const radio_props = [
+    {label: 'Nam', value: 0 },
+    {label: 'Nữ', value: 1 },
+    {label: 'Khác', value: null}
+  ];
+  
+const SignUp = ({navigation}) => {
 
-export default class SignUp extends Component {
-    render() {
+    const [data, setData] = React.useState({
+        username: '',
+        password: '',
+        confirm_password: '',
+        check_textInputChange: false,
+        secureTextEntry: true,
+        confirm_secureTextEntry: true,
+    });
+
+    const textInputChange = (val) => {
+        if( val.length !== 0 ) {
+            setData({
+                ...data,
+                username: val,
+                check_textInputChange: true
+            });
+        } else {
+            setData({
+                ...data,
+                username: val,
+                check_textInputChange: false
+            });
+        }
+    }
+
+    const handlePasswordChange = (val) => {
+        setData({
+            ...data,
+            password: val
+        });
+    }
+
+    const handleConfirmPasswordChange = (val) => {
+        setData({
+            ...data,
+            confirm_password: val
+        });
+    }
+
+    const updateSecureTextEntry = () => {
+        setData({
+            ...data,
+            secureTextEntry: !data.secureTextEntry
+        });
+    }
+
+    const updateConfirmSecureTextEntry = () => {
+        setData({
+            ...data,
+            confirm_secureTextEntry: !data.confirm_secureTextEntry
+        });
+    }
+    const [value,setValue]=React.useState('');
         return(
+            <SafeAreaView>
             <View style={styles.container}>
-                <View style={styles.top}>
-                <Icon name="left" size={10} style={{paddingTop:4,paddingStart:2}}
-                    onPress={console.log("clicked")}
-                />
-                </View>
-                <View style={styles.up}>
-                    <Text style={{color:'green', fontSize: 23, fontFamily:'Roboto Slab', fontStyle:'normal'}}>ĐĂNG KÝ</Text>
-                </View>
-                <View style={styles.down}>
-                    <Text style={{fontSize: 14,}}>Vui lòng điền số điện thoại vào ô bên dưới</Text>
-                    <Text style={{fontSize: 14,}}>Chúng tôi sẽ gửi mã OTP đến số điện thoại của bạn để kích hoạt</Text>
-                </View>
-                <View style={styles.bot}>
+                <Text>Đăng ký</Text>
+                <View>
+                    <Text>Tên đăng nhập</Text>
                     <TextInput
-                        style={styles.textInput}
-                        keyboardType='numeric'
-                        placeholder='Nhập số điện thoại'
-                    />
-                    <TouchableOpacity 
-                        style={styles.SignUpButton}
-                        onPress={console.log("clicked")}
-                    >
-                        <Text style={{color:'white'}}>GỬI</Text>
+                    style={styles.textInput}
+                    textContentType='emailAddress'
+                    keyboardType='email-address'
+                    placeholder='Email'
+                    keyboardAppearance='default'>
+
+                    </TextInput>
+                </View>
+                <View>
+                    <Text>Email</Text>
+                    <TextInput
+                    style={styles.textInput}
+                    textContentType='emailAddress'
+                    keyboardType='email-address'
+                    placeholder='Email'
+                    keyboardAppearance='default'>
+
+                    </TextInput>
+                </View>
+                <View>
+                    <Text>Password</Text>
+                    <TextInput
+                    style={styles.textInput}
+                    textContentType='emailAddress'
+                    keyboardType='email-address'
+                    placeholder='Email'
+                    keyboardAppearance='default'>
+                   
+                    </TextInput>
+                    
+                </View>
+                <View>
+                    <Text>Re-type Password</Text>
+                    <TextInput
+                    style={styles.textInput}
+                    textContentType='emailAddress'
+                    keyboardType='email-address'
+                    placeholder='Email'
+                    keyboardAppearance='default'>
+
+                    </TextInput>
+                </View>
+                <View>
+                    <Text>Giới tính</Text>
+                    <RadioForm
+                    style={{marginLeft: 20,}}
+                    radio_props={radio_props}
+                    formHorizontal={true}
+                    labelHorizontal={false}
+                    initial={0}
+                    onPress={(value) => {setValue(value)}}
+                  />
+                </View>
+                <View>
+                    <TouchableOpacity>
+                        <Text>Resgister</Text>
                     </TouchableOpacity>
                 </View>
             </View>
+            </SafeAreaView>
         )
     }
-}
-
+export default SignUp;
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        flexDirection:'column',
-        justifyContent: 'center',
-        alignItems: 'stretch',
-        backgroundColor: 'white',
-    },
-    top:{
-        flex: 1,
-        // backgroundColor:'red',
-        flexDirection: 'row',
-    },
-    up:{
-        flex: 2,
-        flexDirection: 'column',
-        // backgroundColor: 'pink',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      down:{
-        flex: 2,
-        flexDirection: 'column',
-        // backgroundColor: 'green',
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      bot:{
-          flex: 5,
-        //   backgroundColor: 'orange',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-      },
-      textInput:{
+    textInput:{
         width: 280,
         height: 45,
-      },
-      SignUpButton:{
-        width: 300,
-        height: 45,
-        borderRadius: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#00A79C',
-        marginTop: 10,
       },
 })
