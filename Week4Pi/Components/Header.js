@@ -1,27 +1,77 @@
-import React, { useState} from 'react';
-import { View, Text ,TextInput,TouchableOpacity,StyleSheet} from 'react-native';
+import React, { useEffect, useState} from 'react';
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Autocomplete from 'react-native-autocomplete-input';
 const Header =({navigation})=>{
-    const [value, onChangeText] = useState('Useless Placeholder');
 
-   
+  const [MainJSON, setMainJSON] = useState([]);
+ 
+  // Used to set Filter JSON Data.
+  const [FilterData, setFilterData] = useState([]);
+  
+  // Used to set Selected Item in State.
+  const [selectedItem, setselectedItem] = useState({});
+ 
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos/')
+      .then((res) => res.json())
+      .then((json) => {
+        setMainJSON(json);
+      })
+      .catch((e) => {
+        alert(e);
+      });
+  }, []);
+  const SearchDataFromJSON = (query) => {
+    if (query) {
+      //Making the Search as Case Insensitive.
+      const regex = new RegExp(`${query.trim()}`, 'i');
+      setFilterData(
+        MainJSON.filter((data) => data.title.search(regex) >= 0)
+      );
+    } else {
+      setFilterData([]);
+    }
+  };
+ 
+    
     return (
       <View style={styles.container}>
-        <View style={styles.search}>
-            <View style={styles.boxSearch}>
-                <Icon name="search" size={25} style={styles.iconSearch}/>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={text => onChangeText(text)}
-                    placeholder="Tên khách sạn, địa điểm ..."
-                />
-            </View>
-            <Icon name="map" size={30} style={styles.iconMap}
+      <View style={styles.search}>
+      <View style={styles.boxSearch}>
+        <Icon name="search" size={25} style={styles.iconSearch}/>
+        <Autocomplete
+          autoCapitalize="none"
+          autoCorrect={false}
+          containerStyle={styles.input}
+          data={FilterData}
+          defaultValue={
+            JSON.stringify(selectedItem) === '{}' ?
+            '' :
+            selectedItem.title
+          }
+          keyExtractor={(item, i) => i.toString()}
+          onChangeText={(text) => SearchDataFromJSON(text)}
+          placeholder="Type The Search Keyword..."
+          renderItem={({item}) => (
+            <TouchableOpacity style={{position:'relative',zIndex:1000}}
+              onPress={() => {
+                setselectedItem(item);
+                setFilterData([]);
+              }}>
+              <Text style={styles.SearchBoxTextItem}>
+                  {item.title}
+              </Text>
+            </TouchableOpacity>
+          )}
+        />
+ 
+        </View>
+        <Icon name="map" size={30} style={styles.iconMap}
             onPress={() => navigation.navigate('Maps')}
             />
-        </View>
-        
-        <TouchableOpacity style={styles.button}>
+      </View>
+      <TouchableOpacity style={styles.button}>
             <Text style={{textAlign:"center",lineHeight:45,fontSize:18,fontWeight:"700",color:"#FFFFFF"}}>Gửi</Text>
         </TouchableOpacity>
       </View>
@@ -53,8 +103,11 @@ const styles = StyleSheet.create({
       borderRadius:30,
       backgroundColor:"#F2FFFE",
       paddingLeft:30,
-      fontSize:14,
+      
       lineHeight:16.41,
+      position:'relative',
+      zIndex:1,
+      borderWidth:0,
     },
     iconMap:{
       top:6,
@@ -66,7 +119,9 @@ const styles = StyleSheet.create({
       height: 45,
       backgroundColor: '#26AE90',
       borderRadius: 40,
-      marginTop:30
+      marginTop:30,
+      position: 'relative',
+      zIndex:1,
     },
     infoRoom:{
       flexDirection:'row',
@@ -80,6 +135,32 @@ const styles = StyleSheet.create({
     room:{
       paddingStart:15,
     },
-
+   
+    AutocompleteStyle: {
+      width:345,
+      height:45,
+      borderRadius:30,
+      backgroundColor:"#F2FFFE",
+      paddingLeft:30,
+      fontSize:14,
+      lineHeight:16.41,
+      borderWidth: 0,
+    },
+    SearchBoxTextItem: {
+      margin: 5,
+      fontSize: 16,
+      paddingTop: 4,
+      backgroundColor:"green",
+      position:'relative',
+      zIndex:10,
+    },
+    selectedTextContainer: {
+      
+      justifyContent: 'center',
+    },
+    selectedTextStyle: {
+      textAlign: 'center',
+      fontSize: 18,
+    },
 
   });

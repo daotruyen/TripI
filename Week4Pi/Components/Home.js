@@ -19,7 +19,7 @@ const data =[
 }
 ]
 const Home=({navigation})=>{
-
+    
     return (
       <View>
         <View >
