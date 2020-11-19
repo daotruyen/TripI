@@ -76,76 +76,125 @@ const SignUp = ({navigation}) => {
         return(
             <SafeAreaView>
             <View style={styles.container}>
-                <Text>Đăng ký</Text>
-                <View>
-                    <Text>Tên đăng nhập</Text>
-                    <TextInput
-                    style={styles.textInput}
-                    textContentType='emailAddress'
-                    keyboardType='email-address'
-                    placeholder='Email'
-                    keyboardAppearance='default'>
+                <Text style={styles.title}>Đăng ký</Text>
 
-                    </TextInput>
-                </View>
-                <View>
-                    <Text>Email</Text>
-                    <TextInput
-                    style={styles.textInput}
-                    textContentType='emailAddress'
-                    keyboardType='email-address'
-                    placeholder='Email'
-                    keyboardAppearance='default'>
+                <View style={styles.textInputContainer}>
+                    <Text style={styles.textInputTitle}>Tên đăng nhập</Text>
 
-                    </TextInput>
-                </View>
-                <View>
-                    <Text>Password</Text>
                     <TextInput
                     style={styles.textInput}
-                    textContentType='emailAddress'
-                    keyboardType='email-address'
-                    placeholder='Email'
-                    keyboardAppearance='default'>
-                   
-                    </TextInput>
-                    
+                    textContentType='username'
+                    keyboardType='default'
+                    placeholder='Tên đăng nhập'
+                    keyboardAppearance='default'/>
                 </View>
-                <View>
-                    <Text>Re-type Password</Text>
-                    <TextInput
-                    style={styles.textInput}
-                    textContentType='emailAddress'
-                    keyboardType='email-address'
-                    placeholder='Email'
-                    keyboardAppearance='default'>
 
-                    </TextInput>
+                <View style={styles.textInputContainer}>
+                    <Text style={styles.textInputTitle}>Email</Text>
+
+                    <TextInput
+                    style={styles.textInput}
+                    textContentType='emailAddress'
+                    keyboardType='email-address'
+                    placeholder='Email'
+                    keyboardAppearance='default'/>
                 </View>
-                <View>
-                    <Text>Giới tính</Text>
+
+                <View style={styles.textInputContainer}>
+                    <Text style={styles.textInputTitle}>Mật khẩu</Text>
+
+                    <TextInput
+                    style={styles.textInput}
+                    textContentType='password'
+                    secureTextEntry={true}
+                    keyboardType='default'
+                    placeholder='Mật khẩu'                        
+                    keyboardAppearance='default'/>
+                </View>
+
+                <View style={styles.textInputContainer}>
+                    <Text style={styles.textInputTitle}>Nhập lại mật khẩu</Text>
+
+                    <TextInput
+                    style={styles.textInput}
+                    textContentType='password'
+                    secureTextEntry={true}
+                    keyboardType='default'
+                    placeholder='Nhập lại mật khẩu'
+                    keyboardAppearance='default'/>
+                </View>
+                <View style={styles.textInputContainer}>
+                    <Text style={styles.textInputTitle}>Giới tính</Text>
+
                     <RadioForm
-                    style={{marginLeft: 20,}}
+                    style={styles.RadioForm}
+                    buttonColor={'black'}
                     radio_props={radio_props}
                     formHorizontal={true}
                     labelHorizontal={false}
                     initial={0}
                     onPress={(value) => {setValue(value)}}
-                  />
+                    labelColor={'black'}
+                    selectedButtonColor={'black'}
+                    buttonSize={13}/>
                 </View>
-                <View>
-                    <TouchableOpacity>
-                        <Text>Resgister</Text>
-                    </TouchableOpacity>
-                </View>
+
+                <TouchableOpacity style={styles.SignUpButton}>
+                    <Text style={styles.text}>ĐĂNG KÝ</Text>
+                </TouchableOpacity>
             </View>
+
             </SafeAreaView>
         )
     }
 export default SignUp;
 const styles = StyleSheet.create({
+    container:{
+        flexDirection: 'column',
+        alignItems:'center',
+        // justifyContent:'center'
+    },
+    title:{
+        marginTop: 20,
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: '#00A79C'
+    },
+    textInputContainer:{
+        marginTop: 50,
+        borderRadius: 6,
+        backgroundColor: 'rgba(225,225,225,0)',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        // alignItems: 'flex-start',
+        height: 40,
+        borderRadius: 5,
+    },
     textInput:{
         width: 280,
         height: 45,
-      },
+        borderBottomColor: '#C9CFDF',
+        borderBottomWidth: 1,
+    },
+    textInputTitle:{
+        fontWeight: 'bold',
+    },
+    RadioForm:{
+        marginRight: 160,
+        marginTop: 10,
+    },
+    SignUpButton:{
+        marginTop: 100,
+        backgroundColor:'#00A79C',
+        width: 280,
+        height: 45,
+        borderRadius: 50,
+        alignItems:'center',
+        justifyContent: 'center'
+    },
+    text:{
+        fontWeight: 'bold',
+        color: 'white',
+        fontSize: 20,
+    },
 })

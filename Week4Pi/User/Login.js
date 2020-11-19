@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 import Feather from 'react-native-vector-icons/Feather';
 import { AuthContext } from '../Test/Context';
 import Users from './DataUser';
@@ -41,6 +42,7 @@ const Login = ({navigation}) => {
           });
       }
   }
+
   const handlePasswordChange = (val) => {
     if( val.trim().length >= 8 ) {
         setData({
@@ -56,12 +58,23 @@ const Login = ({navigation}) => {
         });
     }
 }
+<<<<<<< HEAD
 //const updateSecureTextEntry = () => {
   //setData({
     //  ...data,
       //secureTextEntry: !data.secureTextEntry
  // });
 //}
+=======
+
+const updateSecureTextEntry = () => {
+  setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry
+  });
+}
+
+>>>>>>> c0038a3fe2f32d67b7b4237564f3fe27fd6e457f
 const handleValidUser = (val) => {
   if( val.trim().length >= 4 ) {
       setData({
@@ -101,24 +114,40 @@ const loginHandle = (userName, password) => {
 }
 
    console.log(useContext(AuthContext));
+
+const Divider = (props) => {
+  return <View {...props}>
+    <View style={styles.line}/>
+    <Text style={styles.text}>HOẶC</Text>
+    <View style={styles.line}/>
+  </View>
+}
     return (
       <View style={styles.container}>
+
         <View style={styles.up}>
           <Text style={styles.title}>Pi</Text>
         </View>
+
         <View style={styles.down}>
           <View style={styles.TextInputContainer}>
+            <Icon
+                name='mail'
+                size={19}
+                style={styles.IconStyle}
+            />
+
             <TextInput
             style={styles.textInput}
             textContentType='emailAddress'
             keyboardType='email-address'
-            placeholder='Email'
+            placeholder='          Email'
             keyboardAppearance='default'
             autoCapitalize="none"
             onChangeText={(val) => textInputChange(val)}
             onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
-            >
-            </TextInput>
+            />
+
             {data.check_textInputChange ? 
                 <View>
                     <Feather 
@@ -128,46 +157,48 @@ const loginHandle = (userName, password) => {
                     />
                 </View>
                 : null}
+
           </View>
+
           <View style={styles.TextInputContainer}>
+            <Icon
+                name='lock'
+                size={19}
+                style={styles.IconStyle}
+            />
+
             <TextInput
             style={styles.textInput}
-            placeholder='PassWord'
-            secureTextEntry='true'
+            placeholder='          Mật Khẩu'
+            secureTextEntry={true}
             autoCapitalize="none"
             onChangeText={(val) => handlePasswordChange(val)}
-            >
-            </TextInput>
+            />
           </View>
+
           { data.isValidPassword ? null : 
             <View >
             <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
             </View>
             }
-          <TouchableOpacity>
-            <Text>Quên mật khẩu</Text>
+
+          <TouchableOpacity style={styles.forgotPassButton}>
+            <Text style={styles.forgotPass}>Quên mật khẩu ?</Text>
           </TouchableOpacity>
+
           <TouchableOpacity style={styles.LoginButton}
            title="Sign in" 
            onPress={() => {loginHandle( data.username, data.password )}}
-          
           >
-            <Text style={styles.LoginButtonTitle}>LOGIN</Text>
+            <Text style={styles.LoginButtonTitle}>ĐĂNG NHẬP</Text>
           </TouchableOpacity>
-          <Text>Hoặc</Text>
-          <View style={{flexDirection:'row'}}>
-            <TouchableOpacity>
-              <Text style={{backgroundColor:'white', marginTop:10}}>FACEBOOK</Text>
-            </TouchableOpacity>
-            <Text>     </Text>
-            <TouchableOpacity>
-              <Text style={{backgroundColor:'white', marginTop:10}}>GOOGLE</Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={styles.LoginButton}
+
+          <Divider style={styles.Divider}></Divider>
+
+          <TouchableOpacity style={styles.SignUpButton}
           onPress={() => navigation.navigate('SignUp')}
           >
-            <Text style={styles.LoginButtonTitle}>REGISTER</Text>
+            <Text style={styles.SignUpButtonTitle}>ĐĂNG KÝ</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -200,17 +231,30 @@ const styles = StyleSheet.create({
   title:{
     flex: 1,
     fontSize: 100,
-    color: 'green',
+    color: '#00A79C',
+    fontWeight: 'bold',
   },
   TextInputContainer:{
     marginTop: 10,
     paddingHorizontal: 10,
     borderRadius: 6,
-    backgroundColor: 'rgba(225,225,225,0.5)',
+    backgroundColor: 'rgba(225,225,225,0)',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    height: 40,
+    borderRadius: 5,
   },
   textInput:{
     width: 280,
     height: 45,
+    borderBottomColor: '#C9CFDF',
+    borderBottomWidth: 1,
+  },
+  IconStyle:{
+    padding: 10,
+    margin: 5,
+    position: 'absolute',
   },
   LoginButton:{
     width: 300,
@@ -219,10 +263,57 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#00A79C',
+    marginTop: 30,
+  },
+  SignUpButton:{
+    width: 300,
+    height: 45,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
     marginTop: 10,
+    borderWidth: 2,
+    borderColor: '#00A79C',
+    marginTop: 5,
+  },
+  forgotPassButton:{
+    marginTop: 20,
+    alignSelf: 'flex-end',
+    marginRight: 60,
   },
   LoginButtonTitle:{
     fontSize: 18,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  SignUpButtonTitle:{
+    fontSize: 18,
+    color: '#00A79C',
+    fontWeight: 'bold',
+  },
+  forgotPass:{
+    color:'red',
+    fontWeight: 'bold',
+  },
+  line:{
+    height: 2,
+    flex: 2,
+    backgroundColor: 'black'
+  },
+  text: {
+    flex: 1,
+    textAlign: 'center',
+    fontSize: 15,
     color: 'black',
+    // fontWeight: 'bold',
+  },
+  Divider: {
+    flexDirection: 'row',
+    width: 300,
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 50
   }
 });
