@@ -43,7 +43,9 @@ const Header =({navigation})=>{
           <Autocomplete
             autoCapitalize="none"
             autoCorrect={false}
+
             //containerStyle={styles.input}
+
             style={styles.input}
             // inputContainerStyle={styles.input}
             data={FilterData}
