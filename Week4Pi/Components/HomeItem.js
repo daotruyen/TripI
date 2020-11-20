@@ -12,9 +12,9 @@ const HomeItem = ({navigation}) => {
   return (
      
       <SafeAreaView>
-        <View>
-          <Header navigation={navigation}/>
-          <Home navigation={navigation}/>
+        <View style={styles.container}>
+          <Header navigation={navigation} style={styles.header}/>
+          <Home navigation={navigation}  style={styles.main}/>
         </View>
         
       </SafeAreaView>
@@ -22,7 +22,17 @@ const HomeItem = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  
-});
+  container:{
+    position:'relative'
+  },
+   header:{
+     position:"absolute",
+     zIndex:10,
+   },
+   main:{
+     position:"absolute",
+     zIndex:-1
+   }
+})
 
 export default HomeItem;

@@ -43,7 +43,7 @@ const Header =({navigation})=>{
           <Autocomplete
             autoCapitalize="none"
             autoCorrect={false}
-            // containerStyle={styles.input}
+            //containerStyle={styles.input}
             style={styles.input}
             // inputContainerStyle={styles.input}
             data={FilterData}
@@ -56,7 +56,7 @@ const Header =({navigation})=>{
             onChangeText={(text) => SearchDataFromJSON(text)}
             placeholder="Type The Search Keyword..."
             renderItem={({item}) => (
-              <TouchableOpacity style={{position:'relative',zIndex:1000}}
+              <TouchableOpacity style={{position:'relative',zIndex:100}}
                 onPress={() => {
                   setselectedItem(item);
                   setFilterData([]);
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
       paddingTop: 4,
       backgroundColor:"green",
       position:'relative',
-      zIndex:10,
+      zIndex:999,
     },
     selectedTextContainer: {
       justifyContent: 'center',
@@ -164,6 +164,8 @@ const styles = StyleSheet.create({
       fontSize: 18,
     },
     boxSearch: {
-      flexDirection:'row'
+      flexDirection:'row',
+      position:'relative',
+      zIndex:1000
     },
   });

@@ -21,7 +21,7 @@ const data =[
 const Home=({navigation})=>{
     
     return (
-      <View>
+      <View style={{position:"relative",zIndex:-1}}>
         <View >
           <View style={styles.title}>
             <Text style={{ paddingVertical: 10, fontSize: 16, fontWeight: '700', }}>Lich sử tìm kiếm</Text>
