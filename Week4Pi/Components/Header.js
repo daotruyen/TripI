@@ -43,6 +43,7 @@ const Header =({navigation})=>{
           <Autocomplete
             autoCapitalize="none"
             autoCorrect={false}
+            // comment
             // containerStyle={styles.input}
             style={styles.input}
             // inputContainerStyle={styles.input}
