@@ -58,14 +58,6 @@ const Login = ({navigation}) => {
         });
     }
 }
-<<<<<<< HEAD
-//const updateSecureTextEntry = () => {
-  //setData({
-    //  ...data,
-      //secureTextEntry: !data.secureTextEntry
- // });
-//}
-=======
 
 const updateSecureTextEntry = () => {
   setData({
@@ -74,7 +66,6 @@ const updateSecureTextEntry = () => {
   });
 }
 
->>>>>>> c0038a3fe2f32d67b7b4237564f3fe27fd6e457f
 const handleValidUser = (val) => {
   if( val.trim().length >= 4 ) {
       setData({

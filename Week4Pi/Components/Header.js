@@ -37,43 +37,46 @@ const Header =({navigation})=>{
     
     return (
       <View style={styles.container}>
-      <View style={styles.search}>
-      <View style={styles.boxSearch}>
-        <Icon name="search" size={25} style={styles.iconSearch}/>
-        <Autocomplete
-          autoCapitalize="none"
-          autoCorrect={false}
-          containerStyle={styles.input}
-          data={FilterData}
-          defaultValue={
-            JSON.stringify(selectedItem) === '{}' ?
-            '' :
-            selectedItem.title
-          }
-          keyExtractor={(item, i) => i.toString()}
-          onChangeText={(text) => SearchDataFromJSON(text)}
-          placeholder="Type The Search Keyword..."
-          renderItem={({item}) => (
-            <TouchableOpacity style={{position:'relative',zIndex:1000}}
-              onPress={() => {
-                setselectedItem(item);
-                setFilterData([]);
-              }}>
-              <Text style={styles.SearchBoxTextItem}>
+        <View style={styles.boxSearch}>
+          <Icon name="search" size={25} style={styles.iconSearch}/>
+
+          <Autocomplete
+            autoCapitalize="none"
+            autoCorrect={false}
+            // containerStyle={styles.input}
+            style={styles.input}
+            // inputContainerStyle={styles.input}
+            data={FilterData}
+            defaultValue={
+              JSON.stringify(selectedItem) === '{}' ?
+              '' :
+              selectedItem.title
+              }
+            keyExtractor={(item, i) => i.toString()}
+            onChangeText={(text) => SearchDataFromJSON(text)}
+            placeholder="Type The Search Keyword..."
+            renderItem={({item}) => (
+              <TouchableOpacity style={{position:'relative',zIndex:1000}}
+                onPress={() => {
+                  setselectedItem(item);
+                  setFilterData([]);
+                }}>
+                <Text style={styles.SearchBoxTextItem}>
                   {item.title}
-              </Text>
-            </TouchableOpacity>
-          )}
-        />
- 
+                </Text>
+              </TouchableOpacity>
+            )}
+          />
+          <Icon 
+          name="map" size={30} style={styles.iconMap}
+          onPress={() => navigation.navigate('Maps')}
+          />
         </View>
-        <Icon name="map" size={30} style={styles.iconMap}
-            onPress={() => navigation.navigate('Maps')}
-            />
-      </View>
-      <TouchableOpacity style={styles.button}>
-            <Text style={{textAlign:"center",lineHeight:45,fontSize:18,fontWeight:"700",color:"#FFFFFF"}}>Gửi</Text>
+
+        <TouchableOpacity style={styles.button}>
+          <Text style={{textAlign:"center",lineHeight:45,fontSize:18,fontWeight:"700",color:"#FFFFFF"}}>Gửi</Text>
         </TouchableOpacity>
+
       </View>
     );
   
@@ -86,9 +89,7 @@ const styles = StyleSheet.create({
       margin:10,
       padding:25,
       backgroundColor:"#A4EBE7",
-    },
-    search:{
-      flexDirection:'row'
+      flexDirection:'column'
     },
     iconSearch:{
       position:'absolute',
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
       color:"#26AE90"
     },
     input:{
-      width:305,
+      width:310,
       height:45,
       borderRadius:30,
       backgroundColor:"#F2FFFE",
@@ -107,7 +108,8 @@ const styles = StyleSheet.create({
       lineHeight:16.41,
       position:'relative',
       zIndex:1,
-      borderWidth:0,
+      // borderWidth:1,
+      borderColor:'#C9CFDF'
     },
     iconMap:{
       top:6,
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
     },
     day:{
       width:144,
-      borderRightWidth:1,
+      // borderRightWidth:1,
       borderRightColor:"#26AE90",
     },
     room:{
@@ -144,7 +146,7 @@ const styles = StyleSheet.create({
       paddingLeft:30,
       fontSize:14,
       lineHeight:16.41,
-      borderWidth: 0,
+      // borderWidth: 0,
     },
     SearchBoxTextItem: {
       margin: 5,
@@ -155,12 +157,13 @@ const styles = StyleSheet.create({
       zIndex:10,
     },
     selectedTextContainer: {
-      
       justifyContent: 'center',
     },
     selectedTextStyle: {
       textAlign: 'center',
       fontSize: 18,
     },
-
+    boxSearch: {
+      flexDirection:'row'
+    },
   });
