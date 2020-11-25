@@ -4,14 +4,15 @@ import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import Maps from '../MapsRoom/Maps'
-
+import Filter from './Filter';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 const HeaderItem = ({ }) => {
-
+  const [Hidden,setHidden] = React.useState(false);
   const navigation = useNavigation();
 
   return (
+    <View>
     <View style={styles.header}>
       <View style={styles.headerSearch}>
         <Icon name="chevron-back-outline" size={20} style={styles.back}
@@ -33,7 +34,12 @@ const HeaderItem = ({ }) => {
           </View>
           <View style={styles.fillterLeft}>
             <Icon name="options" size={20} style={{ color: "#00A79C" }} />
-            <Text style={{ color: "#00A79C" }}>Bộ lọc</Text>
+            <Text style={{ color: "#00A79C" }}
+            onPress={()=>{
+              
+              setHidden(!Hidden);
+            }}
+            >Bộ lọc</Text>
           </View>
         </View>
         <View style={styles.right}>
@@ -47,6 +53,11 @@ const HeaderItem = ({ }) => {
           </View>
         </View>
       </View>
+    </View>
+    <View style={{position:Hidden?"relative":"absolute",zIndex:-1}}>
+      <Filter style={{
+  }}/></View>
+    
     </View>
   );
 }

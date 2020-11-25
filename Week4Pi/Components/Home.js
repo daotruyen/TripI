@@ -18,6 +18,12 @@ const data =[
   space:"Nha Trang",people:2,timeStart:"12/12",timeENd:"13/12",
 }
 ]
+const Space = [
+  {key:1,name :"Hà Nội"},
+  {key:2,name :"TP Hồ Chí Minh"},
+  {key:3,name :"Nha Trang"},
+  {key:4,name :"Nam Định"}
+]
 const Home=({navigation})=>{
     
     return (
@@ -34,8 +40,22 @@ const Home=({navigation})=>{
                 <ListItem 
                 key={index} 
                 navigation={navigation}
-                data={[data]}
+                data={data.space}
                 />
+              )
+            })}
+          </ScrollView>
+        </View>
+        <View >
+          <View style={styles.title}>
+            <Text style={{ paddingVertical: 10, fontSize: 16, fontWeight: '700', }}>Điểm đến</Text>
+            <Icon name="caret-forward-circle-sharp" size={30} style={styles.link} />
+          </View>
+
+          <ScrollView horizontal={true}>
+            {Space.map((data,index)=>{
+              return (
+                <ListPlace name={data.name}/>
               )
             })}
           </ScrollView>
@@ -47,23 +67,11 @@ const Home=({navigation})=>{
           </View>
 
           <ScrollView horizontal={true}>
-            <ListPlace />
-            <ListPlace />
-            <ListPlace />
-            <ListPlace />
-          </ScrollView>
-        </View>
-        <View >
-          <View style={styles.title}>
-            <Text style={{ paddingVertical: 10, fontSize: 16, fontWeight: '700', }}>Lich sử tìm kiếm</Text>
-            <Icon name="caret-forward-circle-sharp" size={30} style={styles.link} />
-          </View>
-
-          <ScrollView horizontal={true}>
-            <ListPlace />
-            <ListPlace />
-            <ListPlace />
-            <ListPlace />
+          {Space.map((data,index)=>{
+              return (
+                <ListPlace name={data.name}/>
+              )
+            })}
           </ScrollView>
         </View>
       </View>

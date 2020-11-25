@@ -15,8 +15,10 @@ const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
 
 const Info = ({navigation}) =>{
 
-    const Heart ={
-      
+    const [heart, setHeart] = React.useState(false)
+
+    const RedHeart = (heart)=>{
+      heart = !heart
     }
     return (
       <SafeAreaView>

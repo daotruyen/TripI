@@ -1,24 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component,useEffect } from 'react';
 import { View, Text } from 'react-native';
 import DetailItem from './DetailItem';
-const ListDetail = ({navigation}) => {
+const ListDetail = ({navigation,route}) => {
+  const {  otherParam } = route.params;
+  const [MainJSON, setMainJSON] = React.useState([]);
+  const [Data,setData]=React.useState([]);
   
-    const arr=[
-      {number:1},
-      {number:2},
-      {number:3},
-      {number:4},
-      {number:5},
-      {number:6},
-      {number:7},
-      {number:8},
-      
-    ]
+  useEffect(()=>{
+    fetch('https://tripiii.herokuapp.com/api/hotels/search'),{
+      method:"POST",
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify(JSON.stringify(otherParam))
+    }
+    .then((res)=>res.json())
+    .then ((responseData)=>{
+      setData(responseData.data)
+      console.log(responseData.data)
+    })
+    .catch((error) => {
+      console.error(error);
+   });
+  },[]);
     return (
       <View>
-        {arr.map((arr,index)=>{
+        {Data.map((arr,index)=>{
           return(
-            <DetailItem key={index} navigation={navigation}/>
+            <DetailItem navigation={navigation}/>
           )
         })}
       </View>

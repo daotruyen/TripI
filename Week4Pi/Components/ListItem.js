@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-const ListItem = ({navigation}) => {
+const ListItem = ({navigation,...data}) => {
     const shadowStyle ={shadowOpacity:1,shadowColor: '#000',}
     return (
         <View style={[styles.shadow,shadowStyle ]}>
@@ -18,7 +18,7 @@ const ListItem = ({navigation}) => {
                 <Icon name="map" size={10} style={{paddingTop:4,paddingStart:2}}
                     onPress={console.log("map")}
                 />
-                <Text style={{paddingLeft:3}}>Nha Trang</Text>
+                <Text style={{paddingLeft:3}}>{data.place}</Text>
             </View>
             <View style={styles.infoplace}>
                 <View style={styles.icon}>

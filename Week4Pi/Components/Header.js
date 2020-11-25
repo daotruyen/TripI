@@ -2,8 +2,10 @@ import React, { useEffect, useState} from 'react';
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Autocomplete from 'react-native-autocomplete-input';
-const Header =({navigation})=>{
 
+
+const Header =({navigation})=>{
+//const [value, onChangeValue]= useState();
   const [MainJSON, setMainJSON] = useState([]);
  
   // Used to set Filter JSON Data.
@@ -11,72 +13,80 @@ const Header =({navigation})=>{
   
   // Used to set Selected Item in State.
   const [selectedItem, setselectedItem] = useState({});
- 
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/todos/')
+  
+  //const [data,setData]=useState([]);
+
+ useEffect(() => {
+    fetch('https://tripiii.herokuapp.com/api/hotels')
       .then((res) => res.json())
       .then((json) => {
-        setMainJSON(json);
+        setMainJSON(json.data);
+        
+       // console.log(json.data);
+        console.log(MainJSON);
       })
       .catch((e) => {
         alert(e);
       });
   }, []);
+  
   const SearchDataFromJSON = (query) => {
     if (query) {
       //Making the Search as Case Insensitive.
       const regex = new RegExp(`${query.trim()}`, 'i');
       setFilterData(
-        MainJSON.filter((data) => data.title.search(regex) >= 0)
+        MainJSON.hotels.filter((data) => data.root_name.search(regex) >= 0)
       );
     } else {
       setFilterData([]);
     }
   };
- 
+  
     
     return (
       <View style={styles.container}>
         <View style={styles.boxSearch}>
           <Icon name="search" size={25} style={styles.iconSearch}/>
 
-          <Autocomplete
+           <Autocomplete
             autoCapitalize="none"
             autoCorrect={false}
-
-            //containerStyle={styles.input}
-
             style={styles.input}
-            // inputContainerStyle={styles.input}
             data={FilterData}
             defaultValue={
               JSON.stringify(selectedItem) === '{}' ?
               '' :
-              selectedItem.title
+              selectedItem.root_name
               }
             keyExtractor={(item, i) => i.toString()}
             onChangeText={(text) => SearchDataFromJSON(text)}
             placeholder="Type The Search Keyword..."
             renderItem={({item}) => (
-              <TouchableOpacity style={{position:'relative',zIndex:100}}
+              <TouchableOpacity style={{position:'relative',zIndex:10}}
                 onPress={() => {
                   setselectedItem(item);
                   setFilterData([]);
+                  //onChangeText(value);
                 }}>
                 <Text style={styles.SearchBoxTextItem}>
-                  {item.title}
+                  {item.root_name}
                 </Text>
               </TouchableOpacity>
             )}
-          />
+          /> 
           <Icon 
           name="map" size={30} style={styles.iconMap}
           onPress={() => navigation.navigate('Maps')}
           />
         </View>
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={{textAlign:"center",lineHeight:45,fontSize:18,fontWeight:"700",color:"#FFFFFF"}}>Gửi</Text>
+        <TouchableOpacity style={styles.button}
+          onPress={() => navigation.navigate('Detail',{
+            //search:value,
+          })}
+        >
+          <Text style={{textAlign:"center",lineHeight:45,fontSize:18,fontWeight:"700",color:"#FFFFFF"}}
+          >Gửi</Text>
         </TouchableOpacity>
 
       </View>
