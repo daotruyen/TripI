@@ -87,7 +87,11 @@ const Filter = () => {
       </View>
       <View style={{ flexDirection: "row", justifyContent: "space-around", paddingVertical: 20, }}>
         <TouchableOpacity style={[styles.button1]}><Text>Thiết lập lại</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.button2}><Text>Áp dụng</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.button2}
+        onPress={()=>{
+          
+        }}
+        ><Text>Áp dụng</Text></TouchableOpacity>
 
       </View>
     </View>

@@ -34,7 +34,7 @@ const TabStack = () => {
             } else if (route.name === 'DetailStack') {
               iconName = focused ? 'list' : 'list-outline';
             }
-            else if (route.name === 'User') {
+            else if (route.name === 'UserStack') {
               iconName = focused ? 'person' : 'person-outline';
             }
   

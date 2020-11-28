@@ -13,27 +13,23 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
 
 
-const Info = ({navigation}) =>{
+const Info = ({navigation,data}) =>{
 
     const [heart, setHeart] = React.useState(false)
-
-    const RedHeart = (heart)=>{
-      heart = !heart
-    }
     return (
       <SafeAreaView>
       <View>
       <ScrollView>
         <View>
           <Icon name="heart-circle-outline" size={40} style={styles.heart}/>
-          <Image  source={require('../imgTest/logo.jpg')} style={styles.logoImg}/>
+          <Image  source={{uri:data.logo}} style={styles.logoImg}/>
           <Icon name="chevron-back-outline" size={40} style={styles.back}
           onPress={() => navigation.goBack()}
           />
         </View>
         <View>
           <View style={{paddingLeft:10}}>
-          <Text style={styles.nameRoom}>Tên Khách Sạn</Text>
+          <Text style={styles.nameRoom}>{data.root_name}</Text>
           <View style={{ flexDirection: 'row',paddingVertical:5 }}>
             <View style={styles.allStar}>
               <Icon name="star" style={{ color: '#F2C042' }} />
@@ -49,11 +45,16 @@ const Info = ({navigation}) =>{
           </View>
           <View style={{ flexDirection: 'row' ,paddingBottom:5,}}>
             <Icon name="location" size={20} style={{ fontSize: 11.06, color: "red" }} />
-            <Text style={{ fontSize: 12, fontWeight: "400" }}>Địa chỉ khách sạn</Text>
+            <Text style={{ fontSize: 12, fontWeight: "400" }}>{data.root_address}</Text>
           </View>
           </View>
           <View style={styles.container}
-            onStartShouldSetResponder={() => navigation.navigate('Maps')}>
+            onStartShouldSetResponder={() => navigation.navigate('Maps',
+              {
+                latitude: data.latitude,
+               longitude: data.longitude
+              }
+            )}>
           
             <MapView
               provider={PROVIDER_GOOGLE} // remove if not using Google Maps
@@ -66,7 +67,7 @@ const Info = ({navigation}) =>{
               }}
             >
               <Marker
-                coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
+                coordinate={{ latitude: data.latitude, longitude: data.longitude}}
                 title={'Sys Homestay'}
               ></Marker>
             </MapView>

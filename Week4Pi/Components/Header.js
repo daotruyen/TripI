@@ -15,15 +15,15 @@ const Header =({navigation})=>{
   const [selectedItem, setselectedItem] = useState({});
   
   //const [data,setData]=useState([]);
-
+  const arr = MainJSON.hotels;
  useEffect(() => {
     fetch('https://tripiii.herokuapp.com/api/hotels')
-      .then((res) => res.json())
+      .then((resp) => resp.json())
       .then((json) => {
         setMainJSON(json.data);
         
        // console.log(json.data);
-        console.log(MainJSON);
+        console.log("đâfd",MainJSON);
       })
       .catch((e) => {
         alert(e);
@@ -34,12 +34,13 @@ const Header =({navigation})=>{
     if (query) {
       //Making the Search as Case Insensitive.
       const regex = new RegExp(`${query.trim()}`, 'i');
+      //console.log('asnkansjas', MainJSON.hotels.filter((data) => data.root_name.search(regex) >= 0));
       setFilterData(
-        MainJSON.hotels.filter((data) => data.root_name.search(regex) >= 0)
+        arr.filter((data) => data.root_name.search(regex) >= 0)
       );
     } else {
       setFilterData([]);
-    }
+    } 
   };
   
     
@@ -53,6 +54,7 @@ const Header =({navigation})=>{
             autoCorrect={false}
             style={styles.input}
             data={FilterData}
+            
             defaultValue={
               JSON.stringify(selectedItem) === '{}' ?
               '' :
@@ -66,7 +68,7 @@ const Header =({navigation})=>{
                 onPress={() => {
                   setselectedItem(item);
                   setFilterData([]);
-                  //onChangeText(value);
+                  
                 }}>
                 <Text style={styles.SearchBoxTextItem}>
                   {item.root_name}
@@ -82,7 +84,9 @@ const Header =({navigation})=>{
 
         <TouchableOpacity style={styles.button}
           onPress={() => navigation.navigate('Detail',{
-            //search:value,
+            
+            searchValue:selectedItem.root_name,
+            
           })}
         >
           <Text style={{textAlign:"center",lineHeight:45,fontSize:18,fontWeight:"700",color:"#FFFFFF"}}

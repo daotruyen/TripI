@@ -70,4 +70,3 @@ allStar:{
     bottom:-6
 },
 });
-
