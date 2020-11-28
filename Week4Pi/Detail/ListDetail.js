@@ -1,24 +1,22 @@
 import React, { Component, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
+import { get } from 'lodash';
 import DetailItem from './DetailItem';
 const ListDetail = ({ navigation, root_name }) => {
 
-  const [Data, setData] = React.useState([]);
-  const [filter,setFilter] =React.useState([]);
-  console.log('data',Data);
-  const array = Data.hotels;
-  console.log('array',array)
+  const [data, setData] = React.useState([]);
+  const [filter, setFilter] = React.useState([]);
   useEffect(() => {
     fetch('https://tripiii.herokuapp.com/api/hotels/search', {
       method: 'POST',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    root_name: root_name ,
-    
-  })
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        root_name: root_name,
+
+      })
     })
       .then((res) => res.json())
       .then((responseData) => {
@@ -58,16 +56,14 @@ const ListDetail = ({ navigation, root_name }) => {
   },[]) */
   return (
     <View>
-      
+
       <FlatList
-      data={array}
-      renderItem={({item})=>{
-        //<DetailItem navigation={navigation}/>
-        <View>
-          <Text>dshgfdvsjkkd</Text>
-        </View>
-      }}
-      keyExtractor={item => item.hotel_id}
+        // data={data && data.hotels ? data.hotels : []}
+        data={get(data, 'hotels', [])}
+        renderItem={({ item, index }) => {
+          return <DetailItem data={item} navigation={navigation} />
+        }}
+        keyExtractor={item => item.hotel_id}
       />
     </View>
   );
