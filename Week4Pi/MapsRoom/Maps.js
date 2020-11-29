@@ -18,7 +18,7 @@ const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 
 
-const Maps = ({navigation}) => {
+const Maps = ({navigation,data}) => {
   const initMap = {
     makers,
     region: {
@@ -109,7 +109,7 @@ const Maps = ({navigation}) => {
         )}
       >
         {state.makers.map((makers, index) => (
-          <DetailItem key={index} navigation={navigation}/>
+          <DetailItem key={index} navigation={navigation} data/>
         ))}
       </ScrollView>
     </View>

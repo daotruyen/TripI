@@ -104,39 +104,40 @@ const SignUp = ({navigation}) => {
                     <Text style={styles.textInputTitle}>Mật khẩu</Text>
 
                     <TextInput
-                    style={styles.textInput}
-                    textContentType='password'
-                    secureTextEntry={true}
-                    keyboardType='default'
-                    placeholder='Mật khẩu'                        
-                    keyboardAppearance='default'/>
+                        style={styles.textInput}
+                        textContentType='password'
+                        secureTextEntry={true}
+                        keyboardType='default'
+                        placeholder='Mật khẩu'                        
+                        keyboardAppearance='default'/>
+                        
                 </View>
 
                 <View style={styles.textInputContainer}>
                     <Text style={styles.textInputTitle}>Nhập lại mật khẩu</Text>
 
                     <TextInput
-                    style={styles.textInput}
-                    textContentType='password'
-                    secureTextEntry={true}
-                    keyboardType='default'
-                    placeholder='Nhập lại mật khẩu'
-                    keyboardAppearance='default'/>
+                        style={styles.textInput}
+                        textContentType='password'
+                        secureTextEntry={true}
+                        keyboardType='default'
+                        placeholder='Nhập lại mật khẩu'
+                        keyboardAppearance='default'/>
                 </View>
                 <View style={styles.textInputContainer}>
                     <Text style={styles.textInputTitle}>Giới tính</Text>
 
                     <RadioForm
-                    style={styles.RadioForm}
-                    buttonColor={'black'}
-                    radio_props={radio_props}
-                    formHorizontal={true}
-                    labelHorizontal={false}
-                    initial={0}
-                    onPress={(value) => {setValue(value)}}
-                    labelColor={'black'}
-                    selectedButtonColor={'black'}
-                    buttonSize={13}/>
+                        style={styles.RadioForm}
+                        buttonColor={'black'}
+                        radio_props={radio_props}
+                        formHorizontal={true}
+                        labelHorizontal={false}
+                        initial={0}
+                        onPress={(value) => {setValue(value)}}
+                        labelColor={'black'}
+                        selectedButtonColor={'black'}
+                        buttonSize={13}/>
                 </View>
 
                 <TouchableOpacity style={styles.SignUpButton}>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-const ListItem = ({navigation,...data}) => {
+const ListItem = ({navigation,place}) => {
     const shadowStyle ={shadowOpacity:1,shadowColor: '#000',}
     return (
         <View style={[styles.shadow,shadowStyle ]}>

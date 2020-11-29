@@ -48,8 +48,8 @@ const TabStack = () => {
         }}
       >
         <Tab.Screen name="HomeStack" component={HomeStack} />
-        <Tab.Screen name="DetailStack" component={DetailStack} />
-        <Tab.Screen name="UserStackInSignIn" component={UserStackInSignIn} />
+        {/* <Tab.Screen name="DetailStack" component={DetailStack} /> */}
+        <Tab.Screen name="UserStack" component={UserStackInSignIn} />
       </Tab.Navigator>
     )
   }

@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import Maps from '../MapsRoom/Maps'
 import Filter from './Filter';
-
 const HeaderItem = ({ }) => {
   const [Hidden,setHidden] = React.useState(false);
   const navigation = useNavigation();

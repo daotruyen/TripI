@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect} from 'react';
 import { Text, View, Dimensions, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 
 import Carousel, { Pagination } from '@amazingbeerbelly/react-native-snap-carousel';
@@ -8,6 +8,8 @@ import { scrollInterpolator, animatedStyles } from './animation';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { get } from 'lodash';
+import Stars from 'react-native-stars';
+import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -17,45 +19,66 @@ const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
 const Info = ({ navigation, route }) => {
 
   const data = get(route, 'params.data', null);
-
+  console.log (data.hotel_id)
+  //console.log(info.hotel.hotel_price[0])
+  const [info,setInfo] = React.useState([]);
+  console.log("info",info)
   const [heart, setHeart] = React.useState(false)
+
+  useEffect(() => {
+    fetch(`https://tripiii.herokuapp.com/api/hotels/${data.hotel_id}`,)
+      .then((res) => res.json())
+      .then((responseData) => {
+        console.log('a', responseData);
+        setInfo(responseData.data.hotel)
+        console.log('dagdasdasshvdjaskk',responseData.data.hotel)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
   return (
     <SafeAreaView>
       <View>
         <ScrollView>
           <View>
             <Icon name="heart-circle-outline" size={40} style={styles.heart} />
-            <Image source={{ uri: get(data, 'logo', '') }} style={styles.logoImg} />
+            <Image source={{ uri: get(info, 'logo', '') }} style={styles.logoImg} />
             <Icon name="chevron-back-outline" size={40} style={styles.back}
               onPress={() => navigation.goBack()}
             />
           </View>
           <View>
             <View style={{ paddingLeft: 10 }}>
-              <Text style={styles.nameRoom}>{get(data, 'root_name', '')}</Text>
+              <Text style={styles.nameRoom}>{get(info, 'root_name', '')}</Text>
               <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
                 <View style={styles.allStar}>
-                  <Icon name="star" style={{ color: '#F2C042' }} />
-                  <Icon name="star" style={{ color: '#F2C042' }} />
-                  <Icon name="star" style={{ color: '#F2C042' }} />
-                  <Icon name="star" style={{ color: '#F2C042' }} />
-                  <Icon name="star" style={{ color: '#F2C042' }} />
+                <Stars
+                    default={get(info,'star_number','0')}
+                    count={5}
+                    half={true}
+                    starSize={15} 
+                    fullStar={<Icons name={'star'} style={[styles.myStarStyle]}/>}
+                    emptyStar={<Icons name={'star-outline'} style={[styles.myStarStyle, styles.myEmptyStarStyle]}/>}
+                    halfStar={<Icons name={'star-half'} style={[styles.myStarStyle]}/>}
+                />
                 </View>
                 <View style={{ flexDirection: 'row' }}>
                   <Icon name="md-chatbox-ellipses" size={20} style={{ fontSize: 11.06, color: "red" }} />
-                  <Text style={{ fontSize: 12, fontWeight: "400" }}>99 Đánh giá</Text>
+                  <Text style={{ fontSize: 12, fontWeight: "400" }}>{get(info,'number_of_reviews','')} Đánh giá</Text>
                 </View>
               </View>
               <View style={{ flexDirection: 'row', paddingBottom: 5, }}>
                 <Icon name="location" size={20} style={{ fontSize: 11.06, color: "red" }} />
-                <Text style={{ fontSize: 12, fontWeight: "400" }}>{get(data, 'root_address','')}</Text>
+                <Text style={{ fontSize: 12, fontWeight: "400" }}>{get(info, 'root_address','')}</Text>
               </View>
             </View>
             <View style={styles.container}
               onStartShouldSetResponder={() => navigation.navigate('Maps',
                 {
-                  latitude: get(data, 'latitude',''),
-                  longitude: get(data, 'longitude','')
+                  latitude: get(info, 'latitude',''),
+                  longitude: get(info, 'longitude',''),
+                  data:info
                 }
               )}>
 
@@ -80,60 +103,52 @@ const Info = ({ navigation, route }) => {
               <View >
                 <Text style={styles.title} >Giá tốt nhất</Text>
                 <TouchableOpacity style={styles.button}>
-                  <Text style={{ position: "absolute", padding: 8, fontSize: 15, fontWeight: "700" }}>Agoda</Text>
+              <Text style={{ position: "absolute", padding: 8, fontSize: 15, fontWeight: "700" }}>{get(data,'name','')}</Text>
                   <View style={{ alignItems: 'flex-end', paddingRight: 7 }}>
-                    <Text style={{ fontSize: 18, fontWeight: '700', color: "#00BC9A" }}>2.370.000 VND</Text>
+              <Text style={{ fontSize: 18, fontWeight: '700', color: "#00BC9A" }}>0 VNĐ</Text>
                     <Text style={{ fontSize: 11, fontWeight: '400' }}>mỗi đêm</Text>
                   </View>
                 </TouchableOpacity>
               </View>
-              <View>
-                <Text style={styles.title}>Giá khác</Text>
-                <TouchableOpacity style={styles.button}>
-                  <Text style={{ position: "absolute", padding: 8, fontSize: 15, fontWeight: "700" }}>Agoda</Text>
-                  <View style={{ alignItems: 'flex-end', paddingRight: 7, }}>
-                    <Text style={{ fontSize: 18, fontWeight: '700', color: "#00BC9A" }}>2.370.000 VND</Text>
-                    <Text style={{ fontSize: 11, fontWeight: '400' }}>mỗi đêm</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                  <Text style={{ position: "absolute", padding: 8, fontSize: 15, fontWeight: "700" }}>Agoda</Text>
-                  <View style={{ alignItems: 'flex-end', paddingRight: 7 }}>
-                    <Text style={{ fontSize: 18, fontWeight: '700', color: "#00BC9A" }}>2.370.000 VND</Text>
-                    <Text style={{ fontSize: 11, fontWeight: '400' }}>mỗi đêm</Text>
-                  </View>
-                </TouchableOpacity>
-                <Text style={{ right: 0 }}>Xem thêm</Text>
-
-              </View>
+              
               <View style={styles.dichvu}>
                 <Text style={{ fontSize: 15, fontWeight: "700" }}>Tiện ích, dịch vụ</Text>
                 <View style={{ flexDirection: 'column', alignContent: "stretch", width: 200 }}>
-                  <View style={{ flexDirection: 'row', width: "50%", }}>
+                  <View style={{ flexDirection: 'row', width: "50%", height:get(info,'night_club')==1?30:0}}>
                     <Icon name="fast-food" size={20} />
-                    <Text>Dịch vụ abc</Text>
+                    <Text>câu lạc bộ đêm</Text>
                   </View>
-                  <View style={{ flexDirection: 'row', width: "50%", }}>
+                  <View style={{ flexDirection: 'row', width: "50%",height:info.relax_spa==1?30:0 }}>
                     <Icon name="fast-food" size={20} />
-                    <Text>Dịch vụ abc</Text>
+                    <Text>spa thư giãn</Text>
                   </View>
-                  <View style={{ flexDirection: 'row', width: "50%", }}>
+                  <View style={{ flexDirection: 'row', width: "50%",height:info.relax_massage==1?30:0 }}>
                     <Icon name="fast-food" size={20} />
-                    <Text>Dịch vụ abc</Text>
+                    <Text>mát xa thư giãn</Text>
                   </View>
-                  <View style={{ flexDirection: 'row', width: "50%", }}>
+                  <View style={{ flexDirection: 'row', width: "50%", height:info.relax_steam_room==1?30:0}}>
                     <Icon name="fast-food" size={20} />
-                    <Text>Dịch vụ abc</Text>
+                    <Text>mát xa thư giãn</Text>
+                  </View>
+                  <View style={{ flexDirection: 'row', width: "50%", height:info.relax_outdoor_room==1?30:0}}>
+                    <Icon name="fast-food" size={20} />
+                    <Text>phòng thư giãn ngoài trời</Text>
+                  </View>
+                  <View style={{ flexDirection: 'row', width: "50%", height:info.relax_outdoor_pool==1?30:0}}>
+                    <Icon name="fast-food" size={20} />
+                    <Text>bể bơi ngoài trời</Text>
+                  </View>
+                  <View style={{ flexDirection: 'row', width: "50%", height:info.relax_sauna==1?30:0}}>
+                    <Icon name="fast-food" size={20} />
+                    <Text>tắm hơi thư giãn</Text>
+                  </View>
+                  <View style={{ flexDirection: 'row', width: "50%", height:info.relax_pool==1?30:0}}>
+                    <Icon name="fast-food" size={20} />
+                    <Text>bể bơi thư giãn</Text>
                   </View>
                 </View>
               </View>
-              <View>
-                <Text>Mô tả khách sạn</Text>
-                <View>
-                  <Text>Đây là mô tả khách sạn</Text>
-                </View>
-              </View>
-
+             
               <View>
                 <Text>Đánh giá</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
@@ -261,5 +276,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontWeight: "700",
     fontSize: 20,
+  },
+  myStarStyle: {
+    color: 'yellow',
+    backgroundColor: 'transparent',
+    textShadowColor: 'black',
+    textShadowOffset: {width: 1, height: 1},
+    textShadowRadius: 2,
+  },
+  myEmptyStarStyle: {
+    color: 'white',
   }
 });

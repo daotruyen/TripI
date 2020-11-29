@@ -15,6 +15,9 @@ const ListDetail = ({ navigation, root_name }) => {
       },
       body: JSON.stringify({
         root_name: root_name,
+        filter:{
+          
+        }
 
       })
     })
@@ -22,7 +25,7 @@ const ListDetail = ({ navigation, root_name }) => {
       .then((responseData) => {
         //console.log('ajsakjsakjsb', responseData);
         setData(responseData.data)
-        //console.log('dagshvdjaskk',responseData.data)
+        console.log('log',responseData.data)
       })
       .catch((error) => {
         console.error(error);

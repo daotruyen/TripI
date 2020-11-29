@@ -2,11 +2,12 @@ import React, { useEffect, useState} from 'react';
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Autocomplete from 'react-native-autocomplete-input';
+import { get } from 'lodash';
 
 
 const Header =({navigation})=>{
 //const [value, onChangeValue]= useState();
-  const [MainJSON, setMainJSON] = useState([]);
+  const [mainJSON, setMainJSON] = useState([]);
  
   // Used to set Filter JSON Data.
   const [FilterData, setFilterData] = useState([]);
@@ -15,7 +16,6 @@ const Header =({navigation})=>{
   const [selectedItem, setselectedItem] = useState({});
   
   //const [data,setData]=useState([]);
-  const arr = MainJSON.hotels;
  useEffect(() => {
     fetch('https://tripiii.herokuapp.com/api/hotels')
       .then((resp) => resp.json())
@@ -23,7 +23,7 @@ const Header =({navigation})=>{
         setMainJSON(json.data);
         
        // console.log(json.data);
-        console.log("đâfd",MainJSON);
+        console.log("đâfd",mainJSON);
       })
       .catch((e) => {
         alert(e);
@@ -36,7 +36,7 @@ const Header =({navigation})=>{
       const regex = new RegExp(`${query.trim()}`, 'i');
       //console.log('asnkansjas', MainJSON.hotels.filter((data) => data.root_name.search(regex) >= 0));
       setFilterData(
-        arr.filter((data) => data.root_name.search(regex) >= 0)
+        get(mainJSON, 'hotels', []).filter((data) => data.root_name.search(regex) >= 0)
       );
     } else {
       setFilterData([]);
@@ -165,12 +165,13 @@ const styles = StyleSheet.create({
       // borderWidth: 0,
     },
     SearchBoxTextItem: {
-      margin: 5,
+      
       fontSize: 16,
       paddingTop: 4,
-      backgroundColor:"green",
+      backgroundColor:"white",
       position:'relative',
       zIndex:999,
+      borderWidth:1
     },
     selectedTextContainer: {
       justifyContent: 'center',

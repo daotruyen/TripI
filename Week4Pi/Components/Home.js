@@ -19,16 +19,16 @@ const data =[
 }
 ]
 const Space = [
-  {key:1,name :"Hà Nội"},
-  {key:2,name :"TP Hồ Chí Minh"},
-  {key:3,name :"Nha Trang"},
-  {key:4,name :"Nam Định"}
+  {key:1,name :"Hà Nội" ,place:require('../imgTest/hanoi.png')},
+  {key:2,name :"TP Hồ Chí Minh",place:require('../imgTest/hcm.jpg')},
+  {key:3,name :"Nha Trang",place:require('../imgTest/nhatrang.jpg')},
+  {key:4,name :"Nam Định",place:require('../imgTest/namdinh.jpg')}
 ]
 const Home=({navigation})=>{
     
     return (
       <View style={{position:"relative",zIndex:-1}}>
-        <View >
+        {/* <View >
           <View style={styles.title}>
             <Text style={{ paddingVertical: 10, fontSize: 16, fontWeight: '700', }}>Lich sử tìm kiếm</Text>
             <Icon name="caret-forward-circle-sharp" size={30} style={styles.link} />
@@ -45,7 +45,7 @@ const Home=({navigation})=>{
               )
             })}
           </ScrollView>
-        </View>
+        </View> */}
         <View >
           <View style={styles.title}>
             <Text style={{ paddingVertical: 10, fontSize: 16, fontWeight: '700', }}>Điểm đến</Text>
@@ -53,9 +53,9 @@ const Home=({navigation})=>{
           </View>
 
           <ScrollView horizontal={true}>
-            {Space.map((data,index)=>{
+            {Space.map((data)=>{
               return (
-                <ListPlace name={data.name}/>
+                <ListPlace name={data.name} place = {data.place}/>
               )
             })}
           </ScrollView>
@@ -69,7 +69,7 @@ const Home=({navigation})=>{
           <ScrollView horizontal={true}>
           {Space.map((data,index)=>{
               return (
-                <ListPlace name={data.name}/>
+                <ListPlace name={data.name} place={data.place}/>
               )
             })}
           </ScrollView>

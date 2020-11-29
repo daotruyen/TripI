@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import Header from './Header';
 import Home from "./Home";
-import FlatListDemo from './Headertest'
+
 const HomeItem = ({navigation}) => {
   return (
      
